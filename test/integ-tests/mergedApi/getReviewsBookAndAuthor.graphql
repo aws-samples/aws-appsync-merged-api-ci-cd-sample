@@ -1,0 +1,30 @@
+query GetReviewsBookAndAuthor {
+    listReviews(limit: 100) {
+        items {
+            id
+            author {
+                id,
+                name,
+                bio,
+                nationality,
+                contactEmail
+            }
+            book {
+                id, 
+                title,
+                genre
+                publicationYear
+                publisherId
+                author {
+                    id,
+                    name,
+                    bio
+                    nationality,
+                    contactEmail
+                }
+            }
+            comment
+            rating
+        }
+    }
+}

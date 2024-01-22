@@ -1,0 +1,17 @@
+mutation createNewBook($authorId: ID!) {
+    createBook(input: {
+        authorId: $authorId, 
+        genre: "Fantasy", 
+        publicationYear: 10,
+        publisherId: "2", 
+        title: "A book for testing"
+    }) {
+        id
+        title
+        id
+        authorId
+        genre
+        publicationYear
+        publisherId
+    }
+}

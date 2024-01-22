@@ -1,0 +1,11 @@
+mutation deleteAuthor($id: ID!) {
+    deleteAuthor(input: {
+        id: $id
+    }) {
+        id,
+        name,
+        contactEmail,
+        bio,
+        nationality
+    }
+}

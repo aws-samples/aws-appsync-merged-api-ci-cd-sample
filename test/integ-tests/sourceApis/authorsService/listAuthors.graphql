@@ -1,0 +1,11 @@
+query listAuthors {
+    listAuthors(limit: 100) {
+        items {
+            id,
+            name,
+            nationality,
+            contactEmail,
+            bio
+        }
+    }
+}

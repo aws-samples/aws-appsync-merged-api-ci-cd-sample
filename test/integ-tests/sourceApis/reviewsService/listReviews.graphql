@@ -1,0 +1,12 @@
+query listReviews {
+    listReviews(limit: 100) {
+        items {
+            id
+            authorId
+            bookId
+            comment
+            rating
+            reviewerId
+        }
+    }
+}

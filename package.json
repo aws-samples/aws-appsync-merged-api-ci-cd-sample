@@ -1,0 +1,39 @@
+{
+  "name": "merged_api_cdk",
+  "version": "0.1.0",
+  "bin": {
+    "book-reviews-mergedapi-stack": "bin/book-reviews-mergedapi-stack.js"
+  },
+  "scripts": {
+    "build": "node build.mjs && tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "@types/cfn-response": "^1.0.5",
+    "@types/jest": "^29.5.1",
+    "@types/node": "20.1.7",
+    "aws-cdk": "^2.121.1",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "~5.0.4"
+  },
+  "dependencies": {
+    "@aws-appsync/utils": "^1.2.6",
+    "@aws-sdk/client-appsync": "^3.476.0",
+    "@aws-sdk/client-cloudformation": "^3.477.0",
+    "@aws-sdk/credential-provider-node": "^3.477.0",
+    "@aws-sdk/signature-v4": "^3.374.0",
+    "aws-cdk-lib": "^2.99.0",
+    "awscdk-appsync-utils": "^0.0.328",
+    "axios": "^1.6.2",
+    "cfn-response": "^1.0.1",
+    "constructs": "^10.0.0",
+    "esbuild": "^0.19.2",
+    "glob": "^10.3.3",
+    "source-map-support": "^0.5.21"
+  }
+}

@@ -1,0 +1,86 @@
+type Author {
+    id: ID!
+    books: BookConnection
+}
+
+type Book {
+    id: ID!
+    title: String!
+    authorId: ID!
+    publisherId: ID
+    genre: String
+    publicationYear: Int
+}
+
+type BookConnection {
+    items: [Book]
+    nextToken: String
+}
+
+input CreateBookInput {
+    title: String!
+    authorId: ID!
+    publisherId: ID
+    genre: String
+    publicationYear: Int
+}
+
+input DeleteBookInput {
+    id: ID!
+}
+
+type Review {
+    bookId: ID! @hidden
+    book: Book
+}
+
+input UpdateBookInput {
+    id: ID!
+    title: String
+    authorId: ID
+    publisherId: ID
+    genre: String
+    publicationYear: Int
+}
+
+type Mutation {
+    createBook(input: CreateBookInput!): Book
+    updateBook(input: UpdateBookInput!): Book
+    deleteBook(input: DeleteBookInput!): Book
+}
+
+type Query {
+    getBook(id: ID!): Book
+    listBooks(limit: Int, nextToken: String): BookConnection
+    queryBooksByAuthorIndex(authorId: ID!, first: Int, after: String): BookConnection
+    queryBooksByPublisherIndex(publisherId: ID!, first: Int, after: String): BookConnection
+    getAuthor(id: ID!): Author
+    @hidden
+}
+
+type Subscription {
+    onCreateBook(
+        id: ID,
+        title: String,
+        authorId: ID,
+        publisherId: ID,
+        genre: String
+    ): Book
+    @aws_subscribe(mutations: ["createBook"])
+    onUpdateBook(
+        id: ID,
+        title: String,
+        authorId: ID,
+        publisherId: ID,
+        genre: String
+    ): Book
+    @aws_subscribe(mutations: ["updateBook"])
+    onDeleteBook(
+        id: ID,
+        title: String,
+        authorId: ID,
+        publisherId: ID,
+        genre: String
+    ): Book
+    @aws_subscribe(mutations: ["deleteBook"])
+}

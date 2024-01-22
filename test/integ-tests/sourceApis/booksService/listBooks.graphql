@@ -1,0 +1,13 @@
+query listBooks {
+    listBooks(limit: 100) {
+        items {
+            id
+            title
+            id
+            authorId
+            genre
+            publicationYear
+            publisherId
+        }
+    }
+}

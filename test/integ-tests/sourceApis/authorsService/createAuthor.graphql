@@ -1,0 +1,14 @@
+mutation createNewAuthor {
+    createAuthor(input: {
+        name: "Jonathon"
+        contactEmail: "jonathon@example.com"
+        nationality: "USA",
+        bio: "Boston novelist"
+    }) {
+        id,
+        name,
+        contactEmail,
+        bio,
+        nationality
+    }
+}

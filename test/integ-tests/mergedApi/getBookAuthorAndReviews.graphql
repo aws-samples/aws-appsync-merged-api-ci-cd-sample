@@ -1,0 +1,23 @@
+query GetBookAuthorsAndReviews($bookId: ID!) {
+    getBook(id: $bookId) {
+        id,
+        title,
+        genre,
+        publicationYear,
+        publisherId
+        author {
+            id,
+            name
+            bio,
+            nationality,
+            contactEmail
+        }
+        reviews {
+            items {
+                id,
+                comment,
+                rating
+            }
+        }
+    }
+}

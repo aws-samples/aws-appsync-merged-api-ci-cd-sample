@@ -1,0 +1,79 @@
+type Author {
+    id: ID!
+    name: String!
+    bio: String
+    contactEmail: String
+    nationality: String
+}
+
+type AuthorConnection {
+    items: [Author]
+    nextToken: String
+}
+
+type Book {
+    id: ID!
+    author: Author
+}
+
+input CreateAuthorInput {
+    name: String!
+    bio: String
+    contactEmail: String
+    nationality: String
+}
+
+input DeleteAuthorInput {
+    id: ID!
+}
+
+type Review {
+    id: ID!
+    author: Author
+}
+
+input UpdateAuthorInput {
+    id: ID!
+    name: String
+    bio: String
+    contactEmail: String
+    nationality: String
+}
+
+type Mutation {
+    createAuthor(input: CreateAuthorInput!): Author
+    updateAuthor(input: UpdateAuthorInput!): Author
+    deleteAuthor(input: DeleteAuthorInput!): Author
+}
+
+type Query {
+    getAuthor(id: ID!): Author
+    listAuthors(limit: Int, nextToken: String): AuthorConnection
+}
+
+type Subscription {
+    onCreateAuthor(
+        id: ID,
+        name: String,
+        bio: String,
+        contactEmail: String,
+        nationality: String
+    ): Author
+    @aws_subscribe(mutations: ["createAuthor"])
+    onUpdateAuthor(
+        id: ID,
+        name: String,
+        bio: String,
+        contactEmail: String,
+        nationality: String
+    ): Author
+    @aws_subscribe(mutations: ["updateAuthor"])
+    onDeleteAuthor(
+        id: ID,
+        name: String,
+        bio: String,
+        contactEmail: String,
+        nationality: String
+    ): Author
+    @aws_subscribe(mutations: ["deleteAuthor"])
+}

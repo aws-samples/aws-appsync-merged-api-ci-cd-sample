@@ -1,0 +1,93 @@
+type Author {
+    id: ID!
+    reviews: ReviewConnection
+}
+
+type Book {
+    id: ID!
+    reviews: ReviewConnection
+}
+
+input CreateReviewInput {
+    bookId: ID!
+    reviewerId: ID!
+    authorId: ID!
+    comment: String!
+    rating: Int!
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
+}
+
+input DeleteReviewInput {
+    id: ID!
+}
+
+type Review {
+    id: ID!
+    bookId: ID!
+    @hidden
+    reviewerId: ID!
+    @hidden
+    authorId: ID!
+    @hidden
+    comment: String!
+    rating: Int!
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
+}
+
+type ReviewConnection {
+    items: [Review]
+    nextToken: String
+}
+
+input UpdateReviewInput {
+    id: ID!
+    bookId: ID
+    reviewerId: ID
+    authorId: ID
+    comment: String
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
+}
+
+type Mutation {
+    createReview(input: CreateReviewInput!): Review
+    updateReview(input: UpdateReviewInput!): Review
+    deleteReview(input: DeleteReviewInput!): Review
+}
+
+type Query {
+    getReview(id: ID!): Review
+    listReviews(limit: Int, nextToken: String): ReviewConnection
+    queryReviewsByBookIndex(bookId: ID!, first: Int, after: String): ReviewConnection
+    queryReviewsByReviewerIndex(reviewerId: ID!, first: Int, after: String): ReviewConnection
+    queryReviewsByBookAuthorIndex(authorId: ID!, first: Int, after: String): ReviewConnection
+}
+
+type Subscription {
+    onCreateReview(
+        id: ID,
+        bookId: ID,
+        reviewerId: ID,
+        authorId: ID,
+        comment: String
+    ): Review
+    @aws_subscribe(mutations: ["createReview"])
+    onUpdateReview(
+        id: ID,
+        bookId: ID,
+        reviewerId: ID,
+        authorId: ID,
+        comment: String
+    ): Review
+    @aws_subscribe(mutations: ["updateReview"])
+    onDeleteReview(
+        id: ID,
+        bookId: ID,
+        reviewerId: ID,
+        authorId: ID,
+        comment: String
+    ): Review
+    @aws_subscribe(mutations: ["deleteReview"])
+}

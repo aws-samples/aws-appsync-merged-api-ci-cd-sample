@@ -1,0 +1,10 @@
+query GetReview($id: ID!) {
+    getReview(id: $id) {
+        id
+        authorId
+        bookId
+        comment
+        rating
+        reviewerId
+    }
+}

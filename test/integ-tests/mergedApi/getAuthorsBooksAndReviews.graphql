@@ -1,0 +1,34 @@
+query GetAuthorsBooksAndReviews {
+    listAuthors(limit: 100) {
+        items {
+            id,
+            name
+            bio,
+            nationality,
+            contactEmail
+            books {
+                items {
+                    id,
+                    title,
+                    genre,
+                    publicationYear,
+                    publisherId,
+                    reviews {
+                        items {
+                            id,
+                            comment,
+                            rating
+                        }
+                    }
+                }
+            }
+            reviews {
+                items {
+                    id,
+                    comment,
+                    rating
+                }
+            }
+        }
+    }
+}

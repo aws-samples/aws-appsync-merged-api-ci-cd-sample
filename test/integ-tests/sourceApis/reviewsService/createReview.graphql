@@ -1,0 +1,12 @@
+mutation createNewReview($authorId: ID!, $bookId: ID!, $comment: String!, $rating: Int!) {
+  createReview(input: {
+    authorId: $authorId, 
+    bookId: $bookId, 
+    comment: $comment, 
+    rating: $rating, 
+    reviewerId: "3"}) {
+        id
+        comment
+        rating
+  }
+}
