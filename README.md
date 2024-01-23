@@ -132,8 +132,7 @@ Also, it contains a Merged API which is able to integrate these 3 services into 
     ./scripts/cleanup-source-api-beta-and-prod-stages.sh
     ```
 
-
-    2. Clean up the Merged API stacks created by the code pipeline (Requires AWS CLI):
+    3. Clean up the Merged API stacks created by the code pipeline (Requires AWS CLI):
     ```
     ./scripts/cleanup-merged-api-beta-and-prod-stages.sh
     ```
