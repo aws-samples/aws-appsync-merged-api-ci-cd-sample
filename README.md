@@ -17,7 +17,7 @@ Also, it contains a Merged API which is able to integrate these 3 services into 
 * For this sample, all APIs are deployed within the same AWS account. 
 * Each source API stack includes a special SourceApiAssociation construct which handles configuring the association to the corresponding Merged API in the corresponding pipeline stage.
 * The construct includes a CustomResource backed by a Lambda function which will propagate changes to the corresponding Merged API whenever the source API stack is updated and verify that the merge is successful. If the merge operation fails, the CustomResource notifies Cloudformation of the failure causing a Rollback and the CodePipeline will halt.
-* Each source API stack includes unit testing using EvaluateCode and integration tests on both the source API and the Merged API after merge occurs. 
+* Each source API stack includes unit testing using the AppSync EvaluateCode API and integration tests on both the source API and the Merged API after merge occurs. 
 
 
 # Deployment Prerequisities
@@ -43,16 +43,16 @@ Also, it contains a Merged API which is able to integrate these 3 services into 
 
 4. Add the repository name in `YOUR_REPOSITORY_NAME` in bin/bookReviewsMergedApi.ts to ensure that the pipeline receives notifications when you commit a change to your repository on Github. 
 
-5. Create an AWS Secrets Manager secret named "github-token" containing your [Github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens/) as a plaintext secret.
+5. Create an [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) secret named "github-token" containing your [Github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens/) as a plaintext secret.
 
-6. Deploy the AppSync SchemaBreakingChangeDetection stack. This stack is resposible for configuraing the Cloudformation Hook which will perform breaking change detection of AppSync schema updates within Cloudformation.
+6. Deploy the AppSync SchemaBreakingChangeDetection stack. This stack is responsible for configuring the Cloudformation Hook which will perform breaking change detection of AppSync schema updates within Cloudformation.
 
     ```
     export AWS_DEFAULT_REGION='us-east-1'
     npx cdk deploy BreakingChangeDetection
     ```
 
-7. Deploy the BookReviews MergedApi CodePipeline Stack. This stack is resposible for configuring the CodePipeline which will handle deploying changes to both the beta and production stage BookReviews Merged API. Note that initially the integration tests in this pipeline are not added initially because they have a dependency on the source APIs being associated. 
+7. Deploy the BookReviews MergedApi [AWS CodePipeline](https://aws.amazon.com/codepipeline/) Stack. This stack is responsible for configuring the CodePipeline which will handle deploying changes to both the beta and production stage BookReviews Merged API. Note that initially the integration tests in this pipeline are not added initially because they have a dependency on the source APIs being associated. 
     ```
     npx cdk deploy BookReviewsMergedApiPipeline
     ```
