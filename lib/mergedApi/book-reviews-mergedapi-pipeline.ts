@@ -21,12 +21,16 @@ export class BookReviewsMergedApiPipeline extends cdk.Stack {
         });
 
         const integTestPolicyStatement = new PolicyStatement({
-            actions: ["appsync:GraphQL", "cloudformation:ListExports"],
+            actions: ["appsync:GraphQL"],
+            resources: [`arn:aws:appsync:${this.region}:${this.account}:*`],
+        });
+
+        const integTestListExportsPolicyStatement = new PolicyStatement({
+            actions: ["cloudformation:ListExports"],
             resources: ["*"],
-        })
+        });
 
         const region = 'us-east-1'
-
 
         // Add integration test steps once the source API pipelines have been deployed.
         pipeline.addStage(new BookReviewsMergedApiStage(this, "BookReviewsMergedApiBetaStage", {
@@ -48,6 +52,7 @@ export class BookReviewsMergedApiPipeline extends cdk.Stack {
                     ],
                     rolePolicyStatements: [
                         integTestPolicyStatement,
+                        integTestListExportsPolicyStatement
                     ]
                 })*/
             ]
@@ -72,6 +77,7 @@ export class BookReviewsMergedApiPipeline extends cdk.Stack {
                     ],
                     rolePolicyStatements: [
                         integTestPolicyStatement,
+                        integTestListExportsPolicyStatement
                     ]
                 }) */
             ]
