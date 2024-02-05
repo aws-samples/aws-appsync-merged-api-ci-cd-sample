@@ -42,7 +42,7 @@ Also, it contains a Merged API which is able to integrate these 3 services into 
     ```
     npm ci && npm run build && npx cdk synth
     ```
-5. Create an [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) secret named "github-token" containing your [Github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens/) as a plaintext secret.
+5. Create an [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) secret named "github-token" containing a fine-grained [Github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens/) as a plaintext secret. The token requires scopes to include repo and admin:repo_hook.
 
 6. Deploy the AppSync SchemaBreakingChangeDetection stack. This stack is responsible for configuring the Cloudformation Hook which will perform breaking change detection of AppSync schema updates within Cloudformation.
 
