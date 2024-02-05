@@ -36,13 +36,12 @@ Also, it contains a Merged API which is able to integrate these 3 services into 
     git clone <your repository fork url>
     ```
 
-3. Install dependencies and build the sample:
+3. Add the forked repository name in `YOUR_REPOSITORY_NAME` in bin/bookReviewsMergedApi.ts to ensure that the pipeline receives notifications when you commit a change to your repository on Github.
+
+4. Install dependencies and build the sample:
     ```
     npm ci && npm run build && npx cdk synth
     ```
-
-4. Add the repository name in `YOUR_REPOSITORY_NAME` in bin/bookReviewsMergedApi.ts to ensure that the pipeline receives notifications when you commit a change to your repository on Github. 
-
 5. Create an [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) secret named "github-token" containing your [Github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens/) as a plaintext secret.
 
 6. Deploy the AppSync SchemaBreakingChangeDetection stack. This stack is responsible for configuring the Cloudformation Hook which will perform breaking change detection of AppSync schema updates within Cloudformation.

@@ -43,7 +43,7 @@ export class BookReviewsMergedApiPipeline extends cdk.Stack {
                 /*new CodeBuildStep('Integ-Test-Beta-MergedApi', {
                     env: {
                         Stage: 'beta',
-                        AWS_REGION: region
+                        AWS_REGION: this.region
                     },
                     commands: [
                         "npm ci",
@@ -68,7 +68,7 @@ export class BookReviewsMergedApiPipeline extends cdk.Stack {
                 /*new CodeBuildStep('Integ-Test-Prod-MergedApi', {
                     env: {
                         Stage: 'prod',
-                        AWS_REGION: region
+                        AWS_REGION: this.region
                     },
                     commands: [
                         "npm ci",

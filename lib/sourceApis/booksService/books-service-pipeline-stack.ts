@@ -4,6 +4,7 @@ import {CodeBuildStep, CodePipeline, CodePipelineSource, ShellStep} from 'aws-cd
 import {BooksServiceStage} from "./books-service-stage";
 import {SecretValue} from "aws-cdk-lib";
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import {YOUR_REPOSITORY_NAME} from "../../../bin/bookReviewsMergedApi";
 
 export class BooksServicePipelineStack extends cdk.Stack {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -11,7 +12,7 @@ export class BooksServicePipelineStack extends cdk.Stack {
         const githubAccessToken = SecretValue.secretsManager('github-token')
         const pipeline = new CodePipeline(this, 'BooksServicePipeline', {
             synth: new ShellStep('Synth', {
-                input: CodePipelineSource.gitHub('ndejaco2/MergedApiCICD', "main",  {
+                input: CodePipelineSource.gitHub(YOUR_REPOSITORY_NAME, "main",  {
                     authentication: githubAccessToken
                 }),
                 commands: ["npm ci", "npm run build", "npx cdk synth"]
