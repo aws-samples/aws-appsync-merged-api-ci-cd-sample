@@ -1,5 +1,5 @@
 import * as cdk from "aws-cdk-lib";
-import { Role, ServicePrincipal } from "aws-cdk-lib/aws-iam";
+import { Role, ServicePrincipal, PrincipalWithConditions } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 
 export class SchemaBreakingChangeDetectionStack extends cdk.Stack {
@@ -8,8 +8,12 @@ export class SchemaBreakingChangeDetectionStack extends cdk.Stack {
         super(scope, id)
 
         const executionRole = new Role(this, 'ActivationExecutionRole', {
-            assumedBy: new ServicePrincipal( "hooks.cloudformation.amazonaws.com")
-          });
+            assumedBy: new PrincipalWithConditions(
+                new ServicePrincipal( "hooks.cloudformation.amazonaws.com"), {
+                    StringEquals: { 'aws:SourceAccount':  this.account },
+                    ArnLike: { 'aws:SourceArn':  `arn:aws:cloudformation:${this.region}:${this.account}:type/hook/AwsCommunity-AppSync-BreakingChangeDetection/*`},
+                })
+        });
 
         const type = new cdk.CfnTypeActivation(this, 'BreakingChangeDetectionHook', {
             executionRoleArn: executionRole.roleArn,
