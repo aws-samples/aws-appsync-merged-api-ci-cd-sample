@@ -30,7 +30,7 @@ export class BooksServicePipelineStack extends cdk.Stack {
 
         const evaluateCodePolicyStatement = new PolicyStatement({
             actions: ["appsync:EvaluateCode"],
-            resources: [`arn:aws:appsync:${this.region}:${this.account}:*`],
+            resources: [`*`],
         })
 
         const integTestPolicyStatement = new PolicyStatement({

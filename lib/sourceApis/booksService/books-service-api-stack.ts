@@ -82,9 +82,6 @@ export class BooksServiceApiStack extends cdk.NestedStack {
         // Mutation to delete a book from the datasource
         this.addJSUnitResolver(`DeleteBookResolver`, "Mutation", "deleteBook", "deleteBook")
 
-        // Mutation to update a book in the datasource
-        // this.addJSUnitResolver(`UpdateBookResolver', "Mutation", "updateBook", "updateBook")
-
         // Query to get book by id
         this.addJSUnitResolver(`GetBookResolver`, "Query", "getBook", "getBook")
 

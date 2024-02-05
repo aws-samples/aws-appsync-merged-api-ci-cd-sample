@@ -66,9 +66,6 @@ export class AuthorsServiceApiStack extends cdk.NestedStack {
         // Mutation to delete an author from the datasource
         this.addJSUnitResolver('DeleteAuthorResolver', "Mutation", "deleteAuthor", "deleteAuthor")
 
-        // Mutation to update an author in the datasource
-        // this.addJSUnitResolver('UpdateAuthorResolver', "Mutation", "updateAuthor", "updateAuthor")
-
         // Query to get author by id
         this.addJSUnitResolver('GetAuthorResolver', "Query", "getAuthor", "getAuthor")
 

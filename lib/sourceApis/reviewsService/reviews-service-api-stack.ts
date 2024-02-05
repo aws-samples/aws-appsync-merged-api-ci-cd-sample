@@ -92,9 +92,6 @@ export class ReviewsServiceApiStack extends cdk.NestedStack {
         // Mutation to delete a review from the datasource
         this.addJSUnitResolver('DeleteReviewResolver', "Mutation", "deleteReview", "deleteReview")
 
-        // Mutation to update a review in the datasource
-        // this.addJSUnitResolver('UpdateReviewResolver', "Mutation", "updateReview", "updateReview")
-
         // Query to get review by id
         this.addJSUnitResolver('GetReviewResolver', "Query", "getReview", "getReview")
 
