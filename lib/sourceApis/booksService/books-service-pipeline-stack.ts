@@ -74,7 +74,7 @@ export class BooksServicePipelineStack extends cdk.Stack {
                 new CodeBuildStep('Integ-Test-Beta-MergedApi', {
                     env: {
                         Stage: 'beta',
-                        AWS_REGION: region
+                        AWS_REGION: this.region
                     },
                     commands: [
                         "npm ci",

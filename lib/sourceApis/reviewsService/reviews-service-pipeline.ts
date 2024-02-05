@@ -73,7 +73,7 @@ export class ReviewsServicePipelineStack extends cdk.Stack {
                 new CodeBuildStep('Integ-Test-Prod-Merged-Api', {
                     env: {
                         Stage: 'prod',
-                        AWS_REGION: region
+                        AWS_REGION: this.region
                     },
                     commands: [
                         "npm ci",
